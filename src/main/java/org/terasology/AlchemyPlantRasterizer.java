@@ -27,33 +27,35 @@ public class AlchemyPlantRasterizer implements WorldRasterizerPlugin {
 
     private Random rand;
 
-    private Map<Integer, Block> block_map = new HashMap<Integer, Block>() {
-        private static final long serialVersionUID = 1L;
-
-        {
-            put(0, antiPoison);
-            put(1, healing);
-            put(2, jumpSpeed);
-            put(3, poison);
-            put(4, rage);
-            put(5, regen);
-            put(6, swimSpeed);
-            put(7, walkSpeed);
-        }
-    };
+    private Map<Integer, Block> block_map;
 
     @Override
     public void initialize() {
         antiPoison = CoreRegistry.get(BlockManager.class).getBlock("Alchemy:AntiPoisonHerb");
         healing = CoreRegistry.get(BlockManager.class).getBlock("Alchemy:HealingHerb");
         jumpSpeed = CoreRegistry.get(BlockManager.class).getBlock("Alchemy:JumpSpeedHerb");
-        poison = CoreRegistry.get(BlockManager.class).getBlock("Alchemy:Poison");
+        poison = CoreRegistry.get(BlockManager.class).getBlock("Alchemy:PoisonHerb");
         rage = CoreRegistry.get(BlockManager.class).getBlock("Alchemy:RageHerb");
         regen = CoreRegistry.get(BlockManager.class).getBlock("Alchemy:RegenHerb");
         swimSpeed = CoreRegistry.get(BlockManager.class).getBlock("Alchemy:SwimSpeedHerb");
         walkSpeed = CoreRegistry.get(BlockManager.class).getBlock("Alchemy:WalkSpeedHerb");
 
         rand = new Random();
+
+        block_map = new HashMap<Integer, Block>() {
+            private static final long serialVersionUID = 1L;
+
+            {
+                put(0, antiPoison);
+                put(1, healing);
+                put(2, jumpSpeed);
+                put(3, poison);
+                put(4, rage);
+                put(5, regen);
+                put(6, swimSpeed);
+                put(7, walkSpeed);
+            }
+        };
     }
 
     @Override

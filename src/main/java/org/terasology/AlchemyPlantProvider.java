@@ -7,9 +7,11 @@ import org.terasology.utilities.procedural.Noise;
 import org.terasology.utilities.procedural.WhiteNoise;
 import org.terasology.world.generation.Border3D;
 import org.terasology.world.generation.ConfigurableFacetProvider;
+import org.terasology.world.generation.Facet;
 import org.terasology.world.generation.FacetProviderPlugin;
 import org.terasology.world.generation.GeneratingRegion;
 import org.terasology.world.generation.Produces;
+import org.terasology.world.generation.Requires;
 import org.terasology.world.generation.facets.SurfaceHeightFacet;
 import org.terasology.world.generator.plugin.RegisterPlugin;
 
@@ -17,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RegisterPlugin
+@Requires(@Facet(SurfaceHeightFacet.class))
 @Produces(AlchemyPlantFacet.class)
 public class AlchemyPlantProvider implements FacetProviderPlugin, ConfigurableFacetProvider {
 
@@ -29,9 +32,9 @@ public class AlchemyPlantProvider implements FacetProviderPlugin, ConfigurableFa
         
         {
             put(0.0f, 1.0f);
-            put(25.0f, 0.998f);
-            put(50.0f, 0.992f);
-            put(75.0f, 0.99f);
+            put(25.0f, 0.991f);
+            put(50.0f, 0.99f);
+            put(75.0f, 0.98f);
             put(100.0f, 0.97f);
         }
     };
