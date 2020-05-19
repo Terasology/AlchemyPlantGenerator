@@ -1,12 +1,12 @@
 {
     "id": "AlchemyPlantGenerator",
     "version": "1.0.0",
-    "author": "Thomas O'Keeffe ",
-    "displayName": "AlchemyPlantGenerator",
+    "author": "Thomas O'Keeffe",
+    "displayName": "Alchemy - Plant Generator",
     "description": "Simple module for spawning plants from the Alchemy module into the world.",
     "dependencies": [
         { "id": "Alchemy", "minVersion": "1.1.0" }
     ],
     "serverSideOnly": false,
-    "isLibrary": true
+    "isWorld": true
 }
