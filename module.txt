@@ -5,7 +5,7 @@
     "displayName": "AlchemyPlantGenerator",
     "description": "Simple module for spawning plants from the Alchemy module into the world.",
     "dependencies": [
-        { "id": "Alchemy", "minVersion": "1.0.0" }
+        { "id": "Alchemy", "minVersion": "1.1.0" }
     ],
     "serverSideOnly": false,
     "isLibrary": true
