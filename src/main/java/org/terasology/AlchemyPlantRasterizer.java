@@ -64,7 +64,7 @@ public class AlchemyPlantRasterizer implements WorldRasterizerPlugin {
 
         for (Vector3i block : alchemyPlantFacet.getWorldRegion()) {
             if (alchemyPlantFacet.getWorld(block)) {
-                chunk.setBlock(ChunkMath.calcBlockPos(block), block_map.get(rand.nextInt(8)));
+                chunk.setBlock(ChunkMath.calcRelativeBlockPos(block), block_map.get(rand.nextInt(8)));
             }
         }
     }
