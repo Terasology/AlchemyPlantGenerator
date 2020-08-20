@@ -1,8 +1,10 @@
+// Copyright 2020 The Terasology Foundation
+// SPDX-License-Identifier: Apache-2.0
 package org.terasology;
 
 import org.terasology.entitySystem.Component;
 import org.terasology.math.geom.BaseVector2i;
-import org.terasology.rendering.nui.properties.Range;
+import org.terasology.nui.properties.Range;
 import org.terasology.utilities.procedural.Noise;
 import org.terasology.utilities.procedural.WhiteNoise;
 import org.terasology.world.generation.Border3D;
@@ -27,7 +29,7 @@ public class AlchemyPlantProvider implements FacetProviderPlugin, ConfigurableFa
 
     private Noise noise;
 
-    private Map<Float, Float> config_map = new HashMap<Float, Float>() {
+    private Map<Float, Float> configMap = new HashMap<Float, Float>() {
         private static final long serialVersionUID = 1L;
         
         {
@@ -58,7 +60,7 @@ public class AlchemyPlantProvider implements FacetProviderPlugin, ConfigurableFa
             int surfaceHeight = (int) surfaceHeightFacet.getWorld(position);
 
             if (facet.getWorldRegion().encompasses(position.getX(), surfaceHeight, position.getY())
-                && noise.noise(position.getX(), position.getY()) > config_map.get(configuration.plantRarity)) {
+                && noise.noise(position.getX(), position.getY()) > configMap.get(configuration.plantRarity)) {
                 facet.setWorld(position.getX(), surfaceHeight, position.getY(), true);
             }
         }
@@ -86,5 +88,4 @@ public class AlchemyPlantProvider implements FacetProviderPlugin, ConfigurableFa
         @Range(min = 0.0f, max = 100f, increment = 25f, precision = 1, description = "Plant Rarity")
         private float plantRarity = 50f;
     }
-
 }
