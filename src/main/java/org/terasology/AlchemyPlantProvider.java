@@ -2,20 +2,20 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.terasology;
 
-import org.terasology.entitySystem.Component;
+import org.terasology.engine.entitySystem.Component;
+import org.terasology.engine.utilities.procedural.Noise;
+import org.terasology.engine.utilities.procedural.WhiteNoise;
+import org.terasology.engine.world.generation.Border3D;
+import org.terasology.engine.world.generation.ConfigurableFacetProvider;
+import org.terasology.engine.world.generation.Facet;
+import org.terasology.engine.world.generation.FacetProviderPlugin;
+import org.terasology.engine.world.generation.GeneratingRegion;
+import org.terasology.engine.world.generation.Produces;
+import org.terasology.engine.world.generation.Requires;
+import org.terasology.engine.world.generation.facets.SurfaceHeightFacet;
+import org.terasology.engine.world.generator.plugin.RegisterPlugin;
 import org.terasology.math.geom.BaseVector2i;
 import org.terasology.nui.properties.Range;
-import org.terasology.utilities.procedural.Noise;
-import org.terasology.utilities.procedural.WhiteNoise;
-import org.terasology.world.generation.Border3D;
-import org.terasology.world.generation.ConfigurableFacetProvider;
-import org.terasology.world.generation.Facet;
-import org.terasology.world.generation.FacetProviderPlugin;
-import org.terasology.world.generation.GeneratingRegion;
-import org.terasology.world.generation.Produces;
-import org.terasology.world.generation.Requires;
-import org.terasology.world.generation.facets.SurfaceHeightFacet;
-import org.terasology.world.generator.plugin.RegisterPlugin;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,13 +25,9 @@ import java.util.Map;
 @Produces(AlchemyPlantFacet.class)
 public class AlchemyPlantProvider implements FacetProviderPlugin, ConfigurableFacetProvider {
 
-    private AlchemyPlantConfiguration configuration = new AlchemyPlantConfiguration();
-
-    private Noise noise;
-
-    private Map<Float, Float> configMap = new HashMap<Float, Float>() {
+    private final Map<Float, Float> configMap = new HashMap<Float, Float>() {
         private static final long serialVersionUID = 1L;
-        
+
         {
             put(0.0f, 1.0f);
             put(25.0f, 0.991f);
@@ -40,6 +36,8 @@ public class AlchemyPlantProvider implements FacetProviderPlugin, ConfigurableFa
             put(100.0f, 0.97f);
         }
     };
+    private AlchemyPlantConfiguration configuration = new AlchemyPlantConfiguration();
+    private Noise noise;
 
     @Override
     public void setSeed(long seed) {
@@ -60,7 +58,7 @@ public class AlchemyPlantProvider implements FacetProviderPlugin, ConfigurableFa
             int surfaceHeight = (int) surfaceHeightFacet.getWorld(position);
 
             if (facet.getWorldRegion().encompasses(position.getX(), surfaceHeight, position.getY())
-                && noise.noise(position.getX(), position.getY()) > configMap.get(configuration.plantRarity)) {
+                    && noise.noise(position.getX(), position.getY()) > configMap.get(configuration.plantRarity)) {
                 facet.setWorld(position.getX(), surfaceHeight, position.getY(), true);
             }
         }
@@ -86,6 +84,6 @@ public class AlchemyPlantProvider implements FacetProviderPlugin, ConfigurableFa
 
     private static class AlchemyPlantConfiguration implements Component {
         @Range(min = 0.0f, max = 100f, increment = 25f, precision = 1, description = "Plant Rarity")
-        private float plantRarity = 50f;
+        private final float plantRarity = 50f;
     }
 }
