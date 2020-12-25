@@ -6,7 +6,6 @@ import org.terasology.math.ChunkMath;
 import org.terasology.registry.CoreRegistry;
 import org.terasology.world.block.Block;
 import org.terasology.world.block.BlockManager;
-import org.terasology.world.block.BlockRegions;
 import org.terasology.world.chunks.CoreChunk;
 import org.terasology.world.generation.Region;
 import org.terasology.world.generation.WorldRasterizerPlugin;
@@ -64,7 +63,7 @@ public class AlchemyPlantRasterizer implements WorldRasterizerPlugin {
     public void generateChunk(CoreChunk chunk, Region chunkRegion) {
         AlchemyPlantFacet alchemyPlantFacet = chunkRegion.getFacet(AlchemyPlantFacet.class);
 
-        for (Vector3ic block : BlockRegions.iterableInPlace(alchemyPlantFacet.getWorldRegion())) {
+        for (Vector3ic block : alchemyPlantFacet.getWorldRegion()) {
             if (alchemyPlantFacet.getWorld(block)) {
                 chunk.setBlock(ChunkMath.calcRelativeBlockPos(block, new Vector3i()), block_map.get(rand.nextInt(8)));
             }

@@ -56,10 +56,10 @@ public class AlchemyPlantProvider implements FacetProviderPlugin, ConfigurableFa
         AlchemyPlantFacet facet = new AlchemyPlantFacet(region.getRegion(), border);
         SurfacesFacet surfacesFacet = region.getRegionFacet(SurfacesFacet.class);
 
-        for (int x = surfacesFacet.getWorldRegion().getMinX(); x <= surfacesFacet.getWorldRegion().getMaxX(); x++) {
-            for (int z = surfacesFacet.getWorldRegion().getMinZ(); z <= surfacesFacet.getWorldRegion().getMaxZ(); z++) {
+        for (int x = surfacesFacet.getWorldRegion().minX(); x <= surfacesFacet.getWorldRegion().maxX(); x++) {
+            for (int z = surfacesFacet.getWorldRegion().minZ(); z <= surfacesFacet.getWorldRegion().maxZ(); z++) {
                 for (int surfaceHeight : surfacesFacet.getWorldColumn(x, z)) {
-                    if (facet.getWorldRegion().containsBlock(x, surfaceHeight + 1, z)
+                    if (facet.getWorldRegion().contains(x, surfaceHeight + 1, z)
                         && noise.noise(x, surfaceHeight, z) > configMap.get(configuration.plantRarity)) {
                         facet.setWorld(x, surfaceHeight + 1, z, true);
                     }
