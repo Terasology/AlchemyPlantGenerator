@@ -13,7 +13,9 @@ import org.terasology.world.generation.Region;
 import org.terasology.world.generation.WorldRasterizerPlugin;
 import org.terasology.world.generator.plugin.RegisterPlugin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -33,7 +35,7 @@ public class AlchemyPlantRasterizer implements WorldRasterizerPlugin {
 
     private Random rand;
 
-    private Map<Integer, Block> blockMap;
+    private List<Block> herbList;
 
     @Override
     public void initialize() {
@@ -48,18 +50,15 @@ public class AlchemyPlantRasterizer implements WorldRasterizerPlugin {
 
         rand = new Random();
 
-        blockMap = new HashMap<>() {
-            {
-                put(0, antiPoison);
-                put(1, healing);
-                put(2, jumpSpeed);
-                put(3, poison);
-                put(4, rage);
-                put(5, regen);
-                put(6, swimSpeed);
-                put(7, walkSpeed);
-            }
-        };
+        herbList = new ArrayList<>();
+        herbList.add(antiPoison);
+        herbList.add(healing);
+        herbList.add(jumpSpeed);
+        herbList.add(poison);
+        herbList.add(rage);
+        herbList.add(regen);
+        herbList.add(swimSpeed);
+        herbList.add(walkSpeed);
     }
 
     @Override
@@ -68,7 +67,7 @@ public class AlchemyPlantRasterizer implements WorldRasterizerPlugin {
 
         for (Vector3ic block : alchemyPlantFacet.getWorldRegion()) {
             if (alchemyPlantFacet.getWorld(block)) {
-                chunk.setBlock(Chunks.toRelative(block, new Vector3i()), blockMap.get(rand.nextInt(8)));
+                chunk.setBlock(Chunks.toRelative(block, new Vector3i()), herbList.get(rand.nextInt(herbList.size())));
             }
         }
     }
