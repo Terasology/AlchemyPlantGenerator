@@ -7,8 +7,8 @@ import org.joml.Vector3ic;
 import org.terasology.engine.registry.In;
 import org.terasology.engine.world.block.Block;
 import org.terasology.engine.world.block.BlockManager;
+import org.terasology.engine.world.chunks.Chunk;
 import org.terasology.engine.world.chunks.Chunks;
-import org.terasology.engine.world.chunks.CoreChunk;
 import org.terasology.engine.world.generation.Region;
 import org.terasology.engine.world.generation.WorldRasterizerPlugin;
 import org.terasology.engine.world.generator.plugin.RegisterPlugin;
@@ -60,7 +60,7 @@ public class AlchemyPlantRasterizer implements WorldRasterizerPlugin {
     }
 
     @Override
-    public void generateChunk(CoreChunk chunk, Region chunkRegion) {
+    public void generateChunk(Chunk chunk, Region chunkRegion) {
         AlchemyPlantFacet alchemyPlantFacet = chunkRegion.getFacet(AlchemyPlantFacet.class);
 
         for (Vector3ic block : alchemyPlantFacet.getWorldRegion()) {
