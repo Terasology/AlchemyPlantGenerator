@@ -1,8 +1,7 @@
-// Copyright 2020 The Terasology Foundation
+// Copyright 2021 The Terasology Foundation
 // SPDX-License-Identifier: Apache-2.0
 package org.terasology;
 
-import org.terasology.engine.entitySystem.Component;
 import org.terasology.engine.utilities.procedural.Noise;
 import org.terasology.engine.utilities.procedural.WhiteNoise;
 import org.terasology.engine.world.generation.Border3D;
@@ -15,6 +14,7 @@ import org.terasology.engine.world.generation.Produces;
 import org.terasology.engine.world.generation.Requires;
 import org.terasology.engine.world.generation.facets.SurfacesFacet;
 import org.terasology.engine.world.generator.plugin.RegisterPlugin;
+import org.terasology.gestalt.entitysystem.component.Component;
 import org.terasology.nui.properties.Range;
 
 import java.util.HashMap;
@@ -86,8 +86,13 @@ public class AlchemyPlantProvider implements FacetProviderPlugin, ConfigurableFa
         this.configuration = (AlchemyPlantConfiguration) configuration;
     }
 
-    private static class AlchemyPlantConfiguration implements Component {
+    private static class AlchemyPlantConfiguration implements Component<AlchemyPlantConfiguration> {
         @Range(min = 0.0f, max = 100f, increment = 25f, precision = 1, description = "Plant Rarity")
         private float plantRarity = 50f;
+
+        @Override
+        public void copy(AlchemyPlantConfiguration other) {
+            this.plantRarity = other.plantRarity;
+        }
     }
 }
