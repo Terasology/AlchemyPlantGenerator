@@ -91,7 +91,7 @@ public class AlchemyPlantProvider implements FacetProviderPlugin, ConfigurableFa
         private float plantRarity = 50f;
 
         @Override
-        public void copy(AlchemyPlantConfiguration other) {
+        public void copyFrom(AlchemyPlantConfiguration other) {
             this.plantRarity = other.plantRarity;
         }
     }
