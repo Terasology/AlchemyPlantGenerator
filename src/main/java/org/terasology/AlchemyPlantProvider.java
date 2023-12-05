@@ -86,9 +86,9 @@ public class AlchemyPlantProvider implements FacetProviderPlugin, ConfigurableFa
         this.configuration = (AlchemyPlantConfiguration) configuration;
     }
 
-    private static class AlchemyPlantConfiguration implements Component<AlchemyPlantConfiguration> {
+    public static class AlchemyPlantConfiguration implements Component<AlchemyPlantConfiguration> {
         @Range(min = 0.0f, max = 100f, increment = 25f, precision = 1, description = "Plant Rarity")
-        private float plantRarity = 50f;
+        public float plantRarity = 50f;
 
         @Override
         public void copyFrom(AlchemyPlantConfiguration other) {
